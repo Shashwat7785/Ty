@@ -14,6 +14,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+with app.app_context():
+    try:
+        db.create_all()
+        print("DATABASE SUCCESS: User table created or verified.", flush=True)
+    except Exception as e:
+        print(f"DATABASE ERROR: {str(e)}", flush=True)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -137,3 +143,4 @@ if __name__ == '__main__':
         db.create_all()
         print("Database initialized and tables created.")
     app.run(debug=True, port=5000)
+
