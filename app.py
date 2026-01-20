@@ -4,20 +4,29 @@ from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
+
 app = Flask(__name__)
 CORS(app)
 app.secret_key = 'yourycjytty' # Unified secret key at the top
+# 1. Force the database path to /home/site/wwwroot/users.db for Azure
+# This path is persistent and shared across all app restarts.
+if "AZURE_HTTP_USER_AGENT" in os.environ or os.path.exists("/home/site/wwwroot"):
+    db_path = "/home/site/wwwroot/users.db"
+    print(f"AZURE DETECTED: Using persistent path {db_path}", flush=True)
+else:
+    # Local development path
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(basedir, 'users.db')
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 with app.app_context():
     try:
         db.create_all()
-        print("DATABASE SUCCESS: User table created or verified.", flush=True)
+        print("AZURE SETUP: Database initialized in persistent storage.", flush=True)
     except Exception as e:
         print(f"DATABASE ERROR: {str(e)}", flush=True)
 
@@ -143,4 +152,5 @@ if __name__ == '__main__':
         db.create_all()
         print("Database initialized and tables created.")
     app.run(debug=True, port=5000)
+
 
