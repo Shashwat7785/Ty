@@ -1,0 +1,236 @@
+body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
+.container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 500px; width: 100%; }
+.question { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+button { width: 100%; padding: 12px; background: #6c5ce7; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
+button:hover { background: #a29bfe; }
+.hidden {
+    display: none !important;
+}
+#auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.tabs button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+}
+
+.tabs button.active {
+    color: #6c5ce7;
+    border-bottom: 2px solid #6c5ce7;
+    font-weight: bold;
+}
+
+#auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.hidden {
+    display: none;
+}
+/* Match Grid Container */
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Individual Match Card */
+.match-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(108, 92, 231, 0.15);
+    border-color: #6c5ce7;
+}
+
+.match-card strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #2d3436;
+    margin-bottom: 5px;
+}
+
+.match-card .type-badge {
+    display: inline-block;
+    background: #a29bfe;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.match-card .email-link {
+    display: block;
+    font-size: 0.9rem;
+    color: #6c5ce7;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.match-card .email-link:hover {
+    text-decoration: underline;
+}
+.match-bio {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #636e72;
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background: #f1f2f6;
+    color: #6c5ce7;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid #dfe6e9;
+}
+
+#signup-bio {
+    width: 100%;
+    height: 80px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: none;
+}
+/* Navbar Styling */
+.navbar {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    position: fixed; /* Keeps it at the top when scrolling */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Fix for the "form-like" appearance */
+.container {
+    margin-top: 100px; /* Add space so the fixed navbar doesn't cover the content */
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6c5ce7;
+    text-decoration: none;
+}
+.logout-btn {
+    background: #ff7675;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Filter Styling */
+#filter-section {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#gender-filter {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.disclaimer {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffeeba;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.nav-item {
+    text-decoration: none;
+    color: #6c5ce7;
+    font-weight: 600;
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    color: #a29bfe;
+    text-decoration: underline;
+}
+
+#nav-user-info {
+    display: flex;
+    align-items: center;
+}

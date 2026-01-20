@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMatch | Personality Matchmaking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">TypeMatch ❤️</a>
+        <ul class="nav-links">
+            <li><a href="#" onclick="location.reload()">Home</a></li>
+            <li id="nav-user-info" class="hidden">
+                <span id="display-username"></span>
+                <a href="#" class="nav-item" onclick="retakeTest()">Retake Test</a>
+                <a href="#" onclick="location.reload()" class="logout-btn">Logout</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <div id="auth-container" class="container">
+    <div class="tabs">
+    <button id="tab-login" class="active" onclick="showAuth('login')">Login</button>
+    <button id="tab-signup" onclick="showAuth('signup')">Sign Up</button>
+</div>
+
+    <form id="login-form">
+        <h2>Welcome Back</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    <form id="signup-form" class="hidden">
+    <h2>Create Account</h2>
+    <p class="disclaimer">⚠️ Only <strong>College</strong> email addresses are allowed.</p>
+    <input type="text" id="signup-username" placeholder="Username" required>
+    <input type="email" id="signup-email" 
+           placeholder="College Email (e.g. 2020uch1234@mnit.ac.in)" 
+           pattern=".+@mnit\.ac\.in" 
+           title="Please use your official MNIT college email ending in @mnit.ac.in"
+           required>
+    
+    <select id="signup-gender" required>
+        <option value="" disabled selected>Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+
+    <textarea id="signup-bio" placeholder="Tell us a bit about yourself..." required></textarea>
+
+    <input type="text" id="signup-interests" placeholder="Interests (e.g. Coding, Hiking, Music)" required>
+
+    <input type="password" id="signup-password" placeholder="Password" required>
+    <button type="submit">Register</button>
+    </form>
+</div>
+    <div id="quiz-container" class="container hidden">
+        <h1>Find Your Perfect Match</h1>
+        <p>Answer these 4 questions to find your personality type.</p>
+        
+        <form id="quiz-form">
+    <div class="question-group">
+        
+        <p>1. Do you feel energized after spending time with a large group?</p>
+        <label><input type="radio" name="ei1" value="E" required> Yes</label>
+        <label><input type="radio" name="ei1" value="I"> No</label>
+
+        <p>2. Do you prefer to think out loud rather than in your head?</p>
+        <label><input type="radio" name="ei2" value="E" required> Yes</label>
+        <label><input type="radio" name="ei2" value="I"> No</label>
+
+        <p>3. Are you usually the one to start a conversation with a stranger?</p>
+        <label><input type="radio" name="ei3" value="E" required> Yes</label>
+        <label><input type="radio" name="ei3" value="I"> No</label>
+    </div>
+
+    <div class="question-group">
+       
+        <p>4. Do you focus on facts and details rather than "big picture" ideas?</p>
+        <label><input type="radio" name="sn1" value="S" required> Yes</label>
+        <label><input type="radio" name="sn1" value="N"> No</label>
+
+        <p>5. Would you rather follow a proven method than invent a new one?</p>
+        <label><input type="radio" name="sn2" value="S" required> Yes</label>
+        <label><input type="radio" name="sn2" value="N"> No</label>
+
+        <p>6. Do you prefer practical beauty over abstract art?</p>
+        <label><input type="radio" name="sn3" value="S" required> Yes</label>
+        <label><input type="radio" name="sn3" value="N"> No</label>
+    </div>
+
+    <div class="question-group">
+        
+        <p>7. Do you prioritize logic over emotions when making a choice?</p>
+        <label><input type="radio" name="tf1" value="T" required> Yes</label>
+        <label><input type="radio" name="tf1" value="F"> No</label>
+
+        <p>8. Are you more interested in being "right" than being "liked"?</p>
+        <label><input type="radio" name="tf2" value="T" required> Yes</label>
+        <label><input type="radio" name="tf2" value="F"> No</label>
+
+        <p>9. Do you stay calm and objective during an argument?</p>
+        <label><input type="radio" name="tf3" value="T" required> Yes</label>
+        <label><input type="radio" name="tf3" value="F"> No</label>
+    </div>
+
+    <div class="question-group">
+        
+        <p>10. Do you prefer having a strict schedule for your day?</p>
+        <label><input type="radio" name="jp1" value="J" required> Yes</label>
+        <label><input type="radio" name="jp1" value="P"> No</label>
+
+        <p>11. Do you like to finish one project before starting another?</p>
+        <label><input type="radio" name="jp2" value="J" required> Yes</label>
+        <label><input type="radio" name="jp2" value="P"> No</label>
+
+        <p>12. Do you feel better when your surroundings are organized?</p>
+        <label><input type="radio" name="jp3" value="J" required> Yes</label>
+        <label><input type="radio" name="jp3" value="P"> No</label>
+    </div>
+
+    <button type="submit">Reveal My Type</button>
+</form>
+        <div id="filter-section" class="hidden">
+        <label for="gender-filter">Filter by Gender:</label>
+        <select id="gender-filter" onchange="applyFilters()">
+        <option value="All">All Genders</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Non-binary">Non-binary</option>
+        </select>
+    </div>
+        <div id="result-area" class="hidden">
+            <h2>Your Type: <span id="mbti-type"></span></h2>
+            <p id="match-suggestion"></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
