@@ -135,6 +135,24 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
         fetchMatches(finalType);
     });
 });
+const personalityLines = {
+    'INTJ': 'Imaginative and strategic thinkers, with a plan for everything.',
+    'INTP': 'Innovative inventors with an unquenchable thirst for knowledge.',
+    'ENTJ': 'Bold, imaginative and strong-willed leaders, always finding a way.',
+    'ENTP': 'Smart and curious thinkers who cannot resist an intellectual challenge.',
+    'INFJ': 'Quiet and mystical, yet very inspiring and tireless idealists.',
+    'INFP': 'Poetic, kind and altruistic people, always eager to help a good cause.',
+    'ENFJ': 'Charismatic and inspiring leaders, able to mesmerize their listeners.',
+    'ENFP': 'Enthusiastic, creative and sociable free spirits who can always smile.',
+    'ISTJ': 'Practical and fact-minded individuals, whose reliability cannot be doubted.',
+    'ISFJ': 'Very dedicated and warm protectors, always ready to defend their loved ones.',
+    'ESTJ': 'Excellent administrators, unsurpassed at managing things – or people.',
+    'ESFJ': 'Extraordinarily caring, social and popular people, always eager to help.',
+    'ISTP': 'Bold and practical experimenters, masters of all kinds of tools.',
+    'ISFP': 'Flexible and charming artists, always ready to explore something new.',
+    'ESTP': 'Smart, energetic and perceptive people who enjoy living on the edge.',
+    'ESFP': 'Spontaneous, energetic and enthusiastic people – life is never boring.'
+};
 
 // --- 4. Matching & Rendering ---
 function fetchMatches(type) {
@@ -149,6 +167,9 @@ function fetchMatches(type) {
         document.getElementById('quiz-form').classList.add('hidden');
         document.getElementById('filter-section').classList.remove('hidden');
         document.getElementById('result-area').classList.remove('hidden');
+         // 3. Display the personality description line
+        const description = personalityLines[type] || "A unique and complex personality.";
+        document.getElementById('type-description').textContent = `"${description}"`;
         document.getElementById('mbti-type').innerText = type;
 
         renderCards(allMatches);
@@ -225,3 +246,4 @@ function applyFilters() {
 
     renderCards(filtered);
 }
+
