@@ -11,7 +11,7 @@ app.secret_key = 'yourycjytty' # Unified secret key at the top
 # 1. Force the database path to /home/site/wwwroot/users.db for Azure
 # This path is persistent and shared across all app restarts.
 if "AZURE_HTTP_USER_AGENT" in os.environ or os.path.exists("/home/site/wwwroot"):
-    db_path = "/home/site/wwwroot/users.db"
+    db_path ="/home/site/wwwroot/users_v3.db"
     print(f"AZURE DETECTED: Using persistent path {db_path}", flush=True)
 else:
     # Local development path
@@ -63,6 +63,8 @@ def index():
 @app.route('/register', methods=['POST'])
 @app.route('/register', methods=['POST'])
 def register():
+    with app.app_context():
+        db.create_all()
     try:
         data = request.json
         print(f"DEBUG: Data received from frontend: {data}") # See what JS is sending
@@ -152,5 +154,6 @@ if __name__ == '__main__':
         db.create_all()
         print("Database initialized and tables created.")
     app.run(debug=True, port=5000)
+
 
 
